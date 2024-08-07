@@ -1,0 +1,259 @@
+<main>
+	<record type="S_ACCOUNTDELETE">
+		<sql statement="DELETE FROM ACCOUNT WHERE ACCOUNT=?"/>
+	</record>
+	<record type="S_ACCOUNTUPDATE">
+		<sql statement="UPDATE ACCOUNT SET Description=?, ParentAccount=? WHERE Account=?"/>
+	</record>
+	<record type="S_ACCOUNTADD">
+		<sql statement="INSERT INTO Account (Account, Description, ParentAccount) VALUES (?,?,?)"/>
+	</record>
+	<record type="LOGMENUADD">
+		<sql statement="INSERT INTO [dbo].[TrxLogUser] ([TrxDate] ,[UserId],[LogMenu]  ,[LogDesc]) VALUES (getdate(),?,?,'')"/>
+	</record>
+	<record type="LOGMENUPARMADD">
+		<sql statement="INSERT INTO [dbo].[TrxLogUser] ([TrxDate] ,[UserId],[LogMenu]  ,[LogDesc]) VALUES (getdate(),?,?,?)"/>
+	</record>
+
+	<record type="PROFILEUPDATE">
+		<sql statement="UPDATE employee SET employee_Name=? WHERE employee_id=?"/>
+	</record>
+	<record type="PASWUPDATE">
+		<sql statement="UPDATE employee SET [pw]=? WHERE employee_id=?"/>
+	</record>
+
+	<record type="P_EMPLOYEEDELETE">
+		<sql statement="DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID=?"/>
+	</record>
+	<record type="P_EMPLOYEEUPDATE">
+		<sql date="5,6," integer="2,7,8," statement="UPDATE EMPLOYEE SET EMPLOYEE_NAME=?, MANAGEMENT_LEVEL=?, ADDR=?, CONTACT_NO=?, JOIN_DATE=?, RESIGN_DATE=?, SALARY_PERCENTAGE=?, SALARY_AMOUNT=?, SALARY_TYPE=? WHERE EMPLOYEE_ID=?"/>
+	</record>
+	<record type="P_EMPLOYEEADD">
+		<sql date="6,7," integer="3,8,9," statement="INSERT INTO EMPLOYEE (EMPLOYEE_ID, EMPLOYEE_NAME, MANAGEMENT_LEVEL, ADDR, CONTACT_NO, JOIN_DATE, RESIGN_DATE, SALARY_PERCENTAGE, SALARY_AMOUNT, SALARY_TYPE) VALUES (?,?,?,?,?,?,?,?,?,?)"/>
+	</record>
+
+	<record type="P_MEMBERDELETE">
+		<sql statement="DELETE FROM MEMBER WHERE MEMBER_ID=?"/>
+	</record>
+	<record type="P_MEMBERUPDATE">
+		<sql statement="UPDATE MEMBER SET MEMBER_NAME=?, MEMBER_CATEGORY=?, ADDR=?, CONTACT_NO=? WHERE MEMBER_ID=?"/>
+	</record>
+	<record type="P_MEMBERADD">
+		<sql statement="INSERT INTO MEMBER (MEMBER_ID, MEMBER_NAME, MEMBER_CATEGORY, ADDR, CONTACT_NO) VALUES (?,?,?,?,?)"/>
+	</record>
+
+	<record type="P_SUPPLIERDELETE">
+		<sql statement="DELETE FROM SUPPLIER WHERE SUPPLIER_ID=?"/>
+	</record>
+	<record type="P_SUPPLIERUPDATE">
+		<sql integer="4," statement="UPDATE SUPPLIER SET SUPPLIER_NAME=?, ADDR=?, CONTACT_NO=?, PAYMENT_GRACE_PERIOD=? WHERE SUPPLIER_ID=?"/>
+	</record>
+	<record type="P_SUPPLIERADD">
+		<sql integer="5," statement="INSERT INTO SUPPLIER (SUPPLIER_ID, SUPPLIER_NAME, ADDR, CONTACT_NO, PAYMENT_GRACE_PERIOD) VALUES (?,?,?,?,?)"/>
+	</record>
+
+	<record type="P_AGENTDELETE">
+		<sql statement="DELETE FROM AGENT WHERE AGENT_ID=?"/>
+	</record>
+	<record type="P_AGENTUPDATE">
+		<sql integer="4," statement="UPDATE AGENT SET AGENT_NAME=?, ADDR=?, CONTACT_NO=?, AGENFEE_PERCENTAGE=? WHERE AGENT_ID=?"/>
+	</record>
+	<record type="P_AGENTADD">
+		<sql integer="5," statement="INSERT INTO AGENT (AGENT_ID, AGENT_NAME, ADDR, CONTACT_NO, AGENFEE_PERCENTAGE) VALUES (?,?,?,?,?)"/>
+	</record>
+
+	<record type="S_BANKDELETE">
+		<sql statement="DELETE FROM BANK WHERE BANK_ID=?"/>
+	</record>
+	<record type="S_BANKUPDATE">
+		<sql statement="UPDATE BANK SET BANK_NAME=?, BANK_ACCOUNT=?, BANK_ACCOUNT_NAME=? WHERE BANK_ID=?"/>
+	</record>
+	<record type="S_BANKADD">
+		<sql statement="INSERT INTO BANK (BANK_ID, BANK_NAME, BANK_ACCOUNT, BANK_ACCOUNT_NAME) VALUES (?,?,?,?)"/>
+	</record>
+
+	<record type="S_ITEMDELETE">
+		<sql statement="DELETE FROM ITEM WHERE ITEM_ID=?"/>
+	</record>
+	<record type="S_ITEMUPDATE">
+		<sql integer="3,6,7,8,9,10,11,12," statement="UPDATE ITEM SET ITEM_DESC=?, CATEGORY=?, QUANTITY=?, UNIT_TYPE=?, REPORT_UNIT_TYPE=?, VOLUME_PER_UNIT=?, PURCHASE_PRICE_PER_UNIT=?, SALES_PRICE_PER_UNIT_1=?, SALES_PRICE_PER_UNIT_2=?, SALES_PRICE_PER_UNIT_3=?, SALES_PRICE_PER_UNIT_4=?, MINIMUM_STOCK=? WHERE ITEM_ID=?"/>
+	</record>
+	<record type="S_ITEMADD">
+		<sql integer="4,7,8,9,10,11,12,13," statement="INSERT INTO ITEM (ITEM_ID, ITEM_DESC, CATEGORY, QUANTITY, UNIT_TYPE, REPORT_UNIT_TYPE, VOLUME_PER_UNIT, PURCHASE_PRICE_PER_UNIT, SALES_PRICE_PER_UNIT_1, SALES_PRICE_PER_UNIT_2, SALES_PRICE_PER_UNIT_3, SALES_PRICE_PER_UNIT_4, MINIMUM_STOCK) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"/>
+	</record>
+
+	<record type="S_TREATMENTDELETE">
+		<sql statement="DELETE FROM TREATMENT WHERE TREATMENT_ID=?"/>
+	</record>
+	<record type="S_TREATMENTUPDATE">
+		<sql statement="UPDATE TREATMENT SET TREATMENT_NAME=? WHERE TREATMENT_ID=?"/>
+	</record>
+	<record type="S_TREATMENTADD">
+		<sql statement="INSERT INTO TREATMENT (TREATMENT_ID, TREATMENT_NAME) VALUES (?,?)"/>
+	</record>
+
+	<record type="S_TREATMENT_ITEMSDELETE">
+		<sql statement="DELETE FROM TREATMENT_ITEMS WHERE TREATMENT_ID=?"/>
+	</record>
+	<record type="S_TREATMENT_ITEMSUPDATE">
+		<sql integer="3,4,5," statement="UPDATE TREATMENT_ITEMS SET TREATMENT_ID=?, ITEM_ID=?, QUANTITY=?, PURCHASE_PRICE_PER_UNIT=?, SALES_PRICE_PER_UNIT=? WHERE TREATMENT_ITEMS_ID=?"/>
+	</record>
+	<record type="S_TREATMENT_ITEMSADD">
+		<sql integer="3,4,5," statement="INSERT INTO TREATMENT_ITEMS (TREATMENT_ITEMS_ID, ITEM_ID, QUANTITY, PURCHASE_PRICE_PER_UNIT, SALES_PRICE_PER_UNIT, TREATMENT_ID) VALUES (?,?,?,?,?,?)"/>
+	</record>
+
+	<record type="S_CARDSDELETE">
+		<sql statement="DELETE FROM CARDS WHERE CARD_ID=?"/>
+	</record>
+	<record type="S_CARDSUPDATE">
+		<sql integer="3,4," statement="UPDATE CARDS SET CARD_NAME=?, CATEGORY=?, CARD_VALUE=?, PAYMENT_GRACE_PERIOD=?, DUE_DATE_TYPE=? WHERE CARD_ID=?"/>
+	</record>
+	<record type="S_CARDSADD">
+		<sql integer="4,5," statement="INSERT INTO CARDS (CARD_ID, CARD_NAME, CATEGORY, CARD_VALUE, PAYMENT_GRACE_PERIOD, DUE_DATE_TYPE) VALUES (?,?,?,?,?,?)"/>
+	</record>
+
+	<record type="S_CARD_ALLOWED_ITEMDELETE">
+		<sql statement="DELETE FROM CARD_ALLOWED_ITEM WHERE CARD_ID=?"/>
+	</record>
+	<record type="S_CARD_ALLOWED_ITEMUPDATE">
+		<sql integer="3," statement="UPDATE CARD_ALLOWED_ITEM SET CARD_ID=?, ITEM_ID=?, DISC_PERCENTAGE=? WHERE CARD_ALLOWED_ITEM_ID=?"/>
+	</record>
+	<record type="S_CARD_ALLOWED_ITEMADD">
+		<sql integer="3," statement="INSERT INTO CARD_ALLOWED_ITEM (CARD_ALLOWED_ITEM_ID, ITEM_ID, DISC_PERCENTAGE, CARD_ID) VALUES (?,?,?,?)"/>
+	</record>
+
+	<record type="S_CARD_ALLOWED_TREATMENTDELETE">
+		<sql statement="DELETE FROM CARD_ALLOWED_TREATMENT WHERE CARD_ID=?"/>
+	</record>
+	<record type="S_CARD_ALLOWED_TREATMENTUPDATE">
+		<sql integer="3,4," statement="UPDATE CARD_ALLOWED_TREATMENT SET CARD_ID=?, TREATMENT_ID=?, SALES_PRICE=?, DISC_PERCENTAGE=? WHERE CARD_ALLOWED_TREATMENT_RECORD_ID=?"/>
+	</record>
+	<record type="S_CARD_ALLOWED_TREATMENTADD">
+		<sql integer="3,4," statement="INSERT INTO CARD_ALLOWED_TREATMENT (CARD_ALLOWED_TREATMENT_RECORD_ID, TREATMENT_ID, SALES_PRICE, DISC_PERCENTAGE, CARD_ID) VALUES (?,?,?,?,?)"/>
+	</record>
+
+	<record type="S_CARD_PACKAGEDELETE">
+		<sql statement="DELETE FROM CARD_PACKAGE WHERE CARD_PACKAGE_ID=?"/>
+	</record>
+	<record type="S_CARD_PACKAGEUPDATE">
+		<sql integer="3," statement="UPDATE CARD_PACKAGE SET DESCRIPTIONS=?, MEMBER_CATEGORY=?, PRICE=? WHERE CARD_PACKAGE_ID=?"/>
+	</record>
+	<record type="S_CARD_PACKAGEADD">
+		<sql integer="4," statement="INSERT INTO CARD_PACKAGE (CARD_PACKAGE_ID, DESCRIPTIONS, MEMBER_CATEGORY, PRICE) VALUES (?,?,?,?)"/>
+	</record>
+
+	<record type="S_CARD_PACKAGE_DETAILDELETE">
+		<sql statement="DELETE FROM CARD_PACKAGE_DETAIL WHERE CARD_PACKAGE_ID=?"/>
+	</record>
+	<record type="S_CARD_PACKAGE_DETAILUPDATE">
+		<sql integer="3," statement="UPDATE CARD_PACKAGE_DETAIL SET CARD_PACKAGE_ID=?, CARD_ID=?, QUANTITY=? WHERE CARD_PACKAGE_DETAIL_ID=?"/>
+	</record>
+	<record type="S_CARD_PACKAGE_DETAILADD">
+		<sql integer="3," statement="INSERT INTO CARD_PACKAGE_DETAIL (CARD_PACKAGE_DETAIL_ID, CARD_ID, QUANTITY, CARD_PACKAGE_ID) VALUES (?,?,?,?)"/>
+	</record>
+	<record type="SALESDELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM SALES WHERE SALES_ID=?"/>
+	</record>
+	<record type="SALES1DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM SALES_DETAILS_ITEM WHERE SALES_ID=?"/>
+	</record>
+	<record type="SALES2DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM SALES_DETAILS_CARD WHERE SALES_ID=?"/>
+	</record>
+	<record type="SALES3DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM SALES_DETAILS_TREATMENT WHERE SALES_ID=?"/>
+	</record>
+	<record type="SALES4DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM TREATMENT_RECORD_DETAIL WHERE TREATMENT_RECORD_ID in (select TREATMENT_RECORD_id from TREATMENT_RECORD where sales_id=?)"/>
+	</record>
+	<record type="SALES5DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM TREATMENT_RECORD WHERE SALES_ID=?"/>
+	</record>
+	<record type="SALESUPDATE">
+		  <sql fieldsum="4" key="2"  date="1," integer="5,6," statement="UPDATE [SALES] SET  [SALES_DATE] =?,[MEMBER_ID]=?,[AGENT_ID]=?,[CARD_ID]=?,[TOTAL_PRICE]=?,[TOTAL_DISCOUNT_AMOUNT]=?, [REMARK]=?,[CARD_PACKAGE_ID]=?,bank_id=? WHERE [SALES_ID]=?"/>
+	</record>
+	<record type="SALES1ADD">
+		  <sql fieldsum="4" key="2" integer="4,5," statement="INSERT INTO [SALES_DETAILS_ITEM] ([SALES_DETAILS_ITEM_ID] ,[ITEM_ID],[QUANTITY] ,[UNIT_VALUE],disc_pct,SALES_ID) VALUES (?,?,?,?,?,?)"/>
+	</record>
+	<record type="SALES2ADD">
+		  <sql fieldsum="4" key="2"  date="6,7,8," integer="4,5," statement="INSERT INTO  [SALES_DETAILS_CARD] ([SALES_DETAILS_CARD_ID],[CARD_ID],[VOUCHER_NO],[CARD_VALUE],[TOPUP_PRICE],[USING_DATE],[EFFECTIVE_DATE],[EXPIRED_DATE],SALES_ID) values (?,?,?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="SALES3ADD">
+		  <sql fieldsum="4" key="2"  integer="4,6," statement="INSERT INTO  [SALES_DETAILS_TREATMENT] ([SALES_DETAILS_TREATMENT_ID],[TREATMENT_ID],QUANTITY,[UNIT_VALUE],SALES_ID,disc_pct) VALUES (?,?,?,?,?,?)"/>
+	</record>
+	<record type="SALESADD">
+		  <sql fieldsum="4" key="2"  date="1," integer="5,6," statement="INSERT INTO  [SALES] ([SALES_DATE] ,[MEMBER_ID],[AGENT_ID],[CARD_ID],[TOTAL_PRICE],[TOTAL_DISCOUNT_AMOUNT], [REMARK],[CARD_PACKAGE_ID],bank_id,sales_id) values (?,?,?,?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="TREATMENTADD">
+		  <sql fieldsum="4" key="2"  date="5," integer="6,7," statement="insert into TREATMENT_RECORD(TREATMENT_RECORD_ID,MEMBER_ID,CARD_ID,SALES_ID,TREATMENT_DATE,TOTAL_TREATMENT,TOTAL_MATERIAL_cost,remark,voucher_no) VALUES (?,?,?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="TREATMENTUPDATE">
+		  <sql fieldsum="4" key="2"  date="4," integer="5,6," statement="update TREATMENT_RECORD set MEMBER_ID=?,CARD_ID=?,sales_id=?,TREATMENT_DATE=?,TOTAL_TREATMENT=?,TOTAL_MATERIAL_cost=?,remark=?,voucher_no=? where TREATMENT_RECORD_ID=?"/>
+	</record>
+	<record type="TREATMENTDETAILADD">
+		  <sql fieldsum="4" key="2"  integer="5,6,7," statement="  INSERT INTO TREATMENT_RECORD_DETAIL(TREATMENT_RECORD_DETAIL_ID,TREATMENT_RECORD_ID,TREATMENT_ID,EMPLOYEE_ID,quantity,price,disc_pct) values(?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="TREATMENT1DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM TREATMENT_RECORD_DETAIL WHERE TREATMENT_RECORD_ID =?"/>
+	</record>
+	<record type="TREATMENT2DELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM TREATMENT_RECORD WHERE TREATMENT_RECORD_ID=?"/>
+	</record>
+	<record type="UPDATECOSTTREATMENT">
+		  <sql fieldsum="4" key="2"  statement="update TREATMENT_RECORD set total_material_cost=(select sum(TREATMENT_RECORD_DETAIL.quantity*treatment_items.quantity*PURCHASE_PRICE_PER_UNIT) from treatment_items inner join TREATMENT_RECORD_DETAIL on treatment_items.TREATMENT_ID=TREATMENT_RECORD_detail.TREATMENT_ID where TREATMENT_RECORD_DETAIL.TREATMENT_RECORD_ID=?) where  TREATMENT_RECORD.treatment_record_id=?"/>
+	</record>
+	<record type="UPDATEUSINGDATE">
+		  <sql fieldsum="3" key="2" date="1," statement="update SALES_DETAILS_CARD set USING_DATE=? where sales_id IN (SELECT SALES_ID FROM SALES WHERE MEMBER_ID=?) and CARD_ID=?"/>
+	</record>
+	<record type="UPDATEUSINGDATETREATMENT">
+		  <sql fieldsum="3" key="2" date="1,4,5," statement="update SALES_DETAILS_CARD set USING_DATE=? where sales_id IN (SELECT SALES_ID FROM SALES WHERE MEMBER_ID=?) and CARD_ID=? AND EFFECTIVE_DATE &lt;=? AND EXPIRED_DATE >=?"/>
+	</record>
+	<record type="SALESMEMBERADD">
+		  <sql fieldsum="4" key="2"  statement="INSERT INTO  MEMBER ([MEMBER_ID] ,[MEMBER_NAME],CONTACT_NO,MEMBER_CATEGORY) values (?,?,?,'STD')"/>
+	</record>
+	<record type="PURCHASESUPPLIERADD">
+		  <sql fieldsum="4" key="2"  statement="INSERT INTO  SUPPLIER ([SUPPLIER_ID] ,[SUPPLIER_NAME],CONTACT_NO) values (?,?,?)"/>
+	</record>
+	<record type="PURCHASEADD">
+		  <sql fieldsum="4" key="2"  date="1,8,9," integer="4,5,6," statement="insert into PURCHASE(PURCHASE_DATE,SUPPLIER_ID,BANK_ID,TOTAL_PURCHASE_PRICE,TOTAL_COST_PRICE,TOTAL_DISCOUNT_AMOUNT,remark,paiddate,PAYMENT_DUE_DATE,PURCHASE_ID) VALUES (?,?,?,?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="PURCHASEUPDATE">
+		  <sql fieldsum="4" key="2"  date="1,8,9," integer="4,5,6," statement="update PURCHASE set PURCHASE_DATE=?,SUPPLIER_ID=?,BANK_ID=?,TOTAL_PURCHASE_PRICE=?,TOTAL_COST_PRICE=?,TOTAL_DISCOUNT_AMOUNT=?,remark=?,paiddate=?,PAYMENT_DUE_DATE=? WHERE PURCHASE_ID=?"/>
+	</record>
+	<record type="PURCHASEDETAILADD">
+		  <sql fieldsum="4" key="2" double="6,7," statement="INSERT INTO PURCHASE_DETAIL(PURCHASE_DETAIL_ID,PURCHASE_ID,ITEM_ID,QUANTITY,QUANTITYSTOCK,PURCHASE_PRICE,DISCOUNT_AMOUNT) values(?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="PURCHASEPRICEITEM">
+		  <sql fieldsum="4" key="2" double="1," statement="UPDATE ITEM SET PURCHASE_PRICE_PER_UNIT=? WHERE ITEM_ID=?"/>
+	</record>
+	<record type="PURCHASEDELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM PURCHASE WHERE PURCHASE_ID =?"/>
+	</record>
+	<record type="PURCHASEDETAILDELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM PURCHASE_DETAIL WHERE PURCHASE_ID=?"/>
+	</record>
+	<record type="BANKADD">
+		  <sql fieldsum="9" key="2" date="7," double="1,2," statement="INSERT INTO BankCash ([Credit],[Debit],[TrxType],[RefNo],[Remarks] ,BANK,TrxDate,SEQ,refcode) VALUES (?,?,?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="BANKREFDELETE">
+		  <sql fieldsum="1" key="2"   statement="DELETE FROM bankcash WHERE refcode=?"/>
+	</record>
+	<record type="BANKDELETE">
+		  <sql fieldsum="1" key="2" date="2,"  statement="DELETE FROM bankcash WHERE bank=? and trxdate=? and refcode=?"/>
+	</record>
+	<record type="BANKDETAILADD">
+		  <sql fieldsum="9" key="2" date="7," double="1,2," statement="INSERT INTO BankCash ([Credit],[Debit],[TrxType],[RefNo],[Remarks] ,BANK,TrxDate,SEQ,refcode,Acct,NoteHeader,paymeth) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"/>
+	</record>
+	<record type="LOGMENUADD">
+		  <sql fieldsum="2" key="2" statement="INSERT INTO [dbo].[TrxLogUser] ([TrxDate] ,[UserId],[LogMenu]  ,[LogDesc]) VALUES (getdate(),?,?,'')"/>
+	</record> 
+	<record type="LOGMENUPARMADD">
+		  <sql fieldsum="2" key="2" statement="INSERT INTO [dbo].[TrxLogUser] ([TrxDate] ,[UserId],[LogMenu]  ,[LogDesc]) VALUES (getdate(),?,?,?)"/>
+	</record> 
+	<record type="PROFILEUPDATE">
+		  <sql fieldsum="2" key="1" statement="update EMPLOYEE SET EMPLOYEE_NAME=? WHERE EMPLOYEE_ID=?"/>
+	</record>
+	<record type="PASWUPDATE">
+		  <sql fieldsum="2" key="1" statement="update EMPLOYEE SET [PW]=? WHERE EMPLOYEE_ID=?"/>
+	</record>
+</main>

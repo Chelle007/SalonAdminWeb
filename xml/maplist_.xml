@@ -1,0 +1,112 @@
+<main>
+	<record type="CONTRA">
+		  <titlescreen>Contra</titlescreen>
+		  <sql>SELECT seq,trxdate,curr,rate,amt FROM [Trx_UnpostedGL]</sql>
+		  <title>SEQ+DATE+CURRENCY+RATE+AMT+</title>
+		  <size>100+200+100+100+200+</size>
+		  <search>CURR+NOTE+REFNO+</search>
+		  <cond>ercode=+</cond>
+		  <order>seq,trxdate</order>
+	</record>
+	<record type="JOBNO">
+		  <titlescreen>Jobno</titlescreen>
+		  <sql>SELECT jobno,trxdate,typecode,bl,voyage,vesselname,b.codedesc FROM [trx_job] a left outer join vmst_customer b on a.customer=b.codeval and a.ercode=b.ercode</sql>
+		  <title>JOBNO+DATE+TYPE+BL NO.+VOYAGE+VESSEL+CUSTOMER+</title>
+		  <size>100+100+100+200+150+200+200+</size>
+          <date>2,</date>
+		  <search>jobno+trxdate+typecode+bl+voyage+vesselname+b.codedesc+</search>
+		  <cond>a.ercode=+</cond>
+		  <order>trxdate</order>
+	</record>
+	<record type="RATECUR">
+		  <titlescreen>Exchange Rate</titlescreen>
+		  <sql>SELECT excrate,trxdate FROM mst_exchangerate</sql>
+		  <title>RATE+EFFECTIVE DATE+</title>
+		  <size>100+300+</size>
+          <date>2,</date>
+		  <search>[excrate]+[trxdate]+</search>
+		  <cond>ercode=+ and curr=+</cond>
+		  <order>trxdate desc</order>
+	</record>
+	<record type="BANK">
+		  <titlescreen>Bank</titlescreen>
+		  <sql>SELECT [CodeVal],[CodeDesc],[Inflag] FROM [vMst_Bank]</sql>
+		  <title>BANK CODE+NAME+CURRENCY+</title>
+		  <size>100+300+200+</size>
+		  <search>[CodeVal]+[CodeDesc]+[Inflag]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="VENDOR">
+		  <titlescreen>Vendor</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_vendor </sql>
+		  <title>VENDOR ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="CUSTOMER">
+		  <titlescreen>Customer</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_CUSTOMER</sql>
+		  <title>CUSTOMER ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="BILLTO">
+		  <titlescreen>Bill To</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_BILLTO</sql>
+		  <title>BILL TO+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="COSIGNEE">
+		  <titlescreen>Cosignee</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_cosignee</sql>
+		  <title>COSIGNEE ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond></cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="SHIPPER">
+		  <titlescreen>Shipper</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_shipper</sql>
+		  <title>SHIPPER ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond></cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="ACCOUNT">
+		  <titlescreen>Account</titlescreen>
+		  <sql>select  [account],[description] from mst_account</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond>ercode=+</cond>
+		  <order>account</order>
+	</record>
+	<record type="ACCOUNTSALES">
+		  <titlescreen>Account</titlescreen>
+		  <sql>select  [account],[description] from mst_account</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond>(account like '41%' or account = '23330' or account='13600')and ercode=+</cond>
+		  <order>account</order>
+	</record>
+	<record type="ACCOUNTCOST">
+		  <titlescreen>Account</titlescreen>
+		  <sql>select  [account],[description] from mst_account</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond>(account like '5%'  or account = '23310')and ercode=+</cond>
+		  <order>account</order>
+	</record>
+</main>

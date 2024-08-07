@@ -1,0 +1,274 @@
+<main>
+	<record type="VOUCHER">
+		  <titlescreen>Voucher No</titlescreen>
+		  <sql>SELECT    dbo.SALES_DETAILS_CARD.VOUCHER_NO, dbo.SALES_DETAILS_CARD.CARD_ID, dbo.CARDS.CARD_NAME, dbo.MEMBER.MEMBER_NAME FROM   SALES_DETAILS_CARD INNER JOIN  dbo.CARDS ON dbo.SALES_DETAILS_CARD.CARD_ID = dbo.CARDS.CARD_ID  INNER JOIN   dbo.SALES ON dbo.SALES_DETAILS_CARD.SALES_ID = dbo.SALES.SALES_ID INNER JOIN dbo.MEMBER ON dbo.SALES.MEMBER_ID = dbo.MEMBER.MEMBER_ID</sql>
+		  <title>VOUCHER NO+CARD ID+DESCRIPTION+MEMBER NAME+</title>
+		  <size>100+100+300+200+</size>
+		  <search>dbo.SALES_DETAILS_CARD.CARD_ID+CARD_NAME+voucher_no+MEMBER_NAME+</search>
+		  <cond> (dbo.SALES_DETAILS_CARD.USING_DATE IS NULL) AND (dbo.SALES_DETAILS_CARD.EFFECTIVE_DATE IS NULL) OR  (dbo.SALES_DETAILS_CARD.USING_DATE IS NULL) AND (dbo.SALES_DETAILS_CARD.EFFECTIVE_DATE &lt;= GETDATE()) AND (dbo.SALES_DETAILS_CARD.EXPIRED_DATE >= GETDATE())</cond>
+		  <order>dbo.SALES_DETAILS_CARD.CARD_ID</order>
+	</record>
+	<record type="ACCOUNT">
+		  <titlescreen>Account</titlescreen>
+		  <sql>SELECT [account] ,[description]  FROM [account]</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond></cond>
+		  <order>account</order>
+	</record>
+	<record type="BANK">
+		  <titlescreen>Bank</titlescreen>
+		  <sql>SELECT [BANK_ID] ,[BANK_NAME]  FROM [BANK]</sql>
+		  <title>BANK ID+BANK NAME+</title>
+		  <size>100+300+</size>
+		  <search>[BANK_ID]+[BANK_NAME]+</search>
+		  <cond></cond>
+		  <order>BANK_ID</order>
+	</record>
+	<record type="SUPPLIER">
+		  <titlescreen>Supplier</titlescreen>
+		  <sql>SELECT [supplier_ID] ,[supplier_NAME],[ADDR],[CONTACT_NO]  FROM [Supplier]</sql>
+		  <title>Supplier ID+NAME+ADDRESS+CONTACT NO+</title>
+		  <size>100+300+100+200+</size>
+		  <search>[Supplier_ID]+[Supplier_NAME]+ADDR+[CONTACT_NO]+</search>
+		  <cond></cond>
+		  <order>Supplier_ID</order>
+	</record>
+	<record type="MEMBER">
+		  <titlescreen>Member</titlescreen>
+		  <sql>SELECT [MEMBER_ID] ,[MEMBER_NAME],[MEMBER_CATEGORY],[ADDR],[CONTACT_NO]  FROM [MEMBER]</sql>
+		  <title>MEMBER ID+NAME+CATEGORY MEMBER+ADDRESS+CONTACT NO+</title>
+		  <size>100+300+100+200+100+</size>
+		  <search>[MEMBER_ID]+[MEMBER_NAME]+[CONTACT_NO]+[MEMBER_CATEGORY]+</search>
+		  <cond></cond>
+		  <order>MEMBER_ID</order>
+	</record>
+	<record type="MEMBERHAVEBALANCE">
+		  <titlescreen>Member</titlescreen>
+		  <sql>SELECT distinct MEMBER.[MEMBER_ID] ,[MEMBER_NAME],[MEMBER_CATEGORY],[ADDR],[CONTACT_NO]  FROM [MEMBER] inner join [VTRX_CARDMEMBER] on member.member_id = VTRX_CARDMEMBER.member_id INNER JOIN CARDS ON CARDS.CARD_ID=[VTRX_CARDMEMBER].CARD_ID AND CARDS.CATEGORY IN ('MC','F')</sql>
+		  <title>MEMBER ID+NAME+CATEGORY MEMBER+ADDRESS+CONTACT NO+</title>
+		  <size>100+300+100+200+100+</size>
+		  <search>MEMBER.[MEMBER_ID]+[MEMBER_NAME]+[CONTACT_NO]+[MEMBER_CATEGORY]+</search>
+		  <cond></cond>
+		  <order>MEMBER.MEMBER_ID</order>
+	</record>
+	<record type="AGENT">
+		  <titlescreen>Agent</titlescreen>
+		  <sql>SELECT [AGENT_ID],[AGENT_NAME],[ADDR],[CONTACT_NO],[AGENFEE_PERCENTAGE] FROM [AGENT]</sql>
+		  <title>AGENT ID+NAME+ADDRESS+CONTACT NO+AGENT FEE+</title>
+		  <size>100+300+100+200+100+</size>
+		  <search>[AGENT_ID]+[AGENT_NAME]+[CONTACT_NO]+</search>
+		  <cond></cond>
+		  <order>AGENT_ID</order>
+	</record>
+	<record type="CARDMEMBERSALES">
+		  <titlescreen>Member Card</titlescreen>
+		  <sql>SELECT SALES_DETAILS_CARD.[CARD_ID],CARD_NAME,SALES_DETAILS_CARD.[VOUCHER_NO],cards.card_value FROM [SALES_DETAILS_CARD] INNER JOIN SALES ON SALES_DETAILS_CARD.SALES_ID=SALES.SALES_ID INNER JOIN CARDS ON SALES_DETAILS_CARD.CARD_ID=CARDS.CARD_ID </sql>
+		  <title>CARD ID+DESCRIPTION+VOUCHER NO+VALUE+</title>
+		  <size>100+300+100+100+</size>
+		  <search>SALES_DETAILS_CARD.[CARD_ID]+SALES_DETAILS_CARD.[VOUCHER_NO]+</search>
+		  <cond> (([EFFECTIVE_DATE] &lt;=getdate() and [EXPIRED_DATE] >=getdate() ) or ([EFFECTIVE_DATE] is null)) AND [USING_DATE] IS NULL and cards.CATEGORY in ('D' ,'OUV' )  and MEMBER_ID=+</cond>
+		  <order>SALES_DETAILS_CARD.CARD_ID</order>
+	</record>
+	<record type="CARDMEMBERTREATMENT">
+		  <titlescreen>Member Card</titlescreen>
+		  <sql>SELECT distinct [VTRX_CARDMEMBER].[CARD_ID],CARD_NAME,voucher_no   FROM [VTRX_CARDMEMBER] INNER JOIN CARDS ON CARDS.CARD_ID=[VTRX_CARDMEMBER].CARD_ID AND CARDS.CATEGORY IN ('MC','F')</sql>
+		  <title>CARD ID+DESCRIPTION+VOUCHER NO+</title>
+		  <size>100+300+100+</size>
+		  <search>[VTRX_CARDMEMBER].[CARD_ID]+CARD_NAME+voucher_no+</search>
+		  <cond>VTRX_CARDMEMBER.MEMBER_ID=+</cond>
+		  <order>[VTRX_CARDMEMBER].[CARD_ID]</order>
+	</record>
+	<record type="CARDPACKAGEMEMBER">
+		  <titlescreen>Package Card</titlescreen>
+		  <sql>SELECT  [CARD_PACKAGE_ID],[DESCRIPTIONS],[PRICE] FROM [CARD_PACKAGE]</sql>
+		  <title>CARD PACKAGE ID+DESCRIPTION+PRICE+</title>
+		  <size>100+300+100+</size>
+		  <search>[CARD_PACKAGE_ID]+[DESCRIPTIONS]+</search>
+		  <cond></cond>
+		  <order>CARD_PACKAGE_ID</order>
+	</record>
+	<record type="CARD">
+		  <titlescreen>Card</titlescreen>
+		  <sql>SELECT  [CARD_ID],[CARD_NAME],[CARD_VALUE] FROM [CARDS]</sql>
+		  <title>CARD ID+NAME+PRICE+</title>
+		  <size>100+300+100+</size>
+		  <search>[CARD_ID]+[CARD_NAME]+</search>
+		  <cond></cond>
+		  <order>CARD_ID</order>
+	</record>
+	<record type="ITEM">
+		  <titlescreen>Item</titlescreen>
+		  <sql>SELECT ITEM.[ITEM_ID],[ITEM_DESC],VMST_ITEM.[QUANTITY],[SALES_PRICE_PER_UNIT_1]   FROM [ITEM] INNER JOIN dbo.VMST_ITEM ON dbo.ITEM.ITEM_ID = dbo.VMST_ITEM.ITEM_ID</sql>
+		  <title>ITEM ID+DESCRIPTION+STOCK+PRICE+</title>
+		  <size>100+300+100+100+</size>
+		  <search>ITEM.[ITEM_ID]+[ITEM_DESC]+</search>
+		  <cond></cond>
+		  <order>ITEM.ITEM_ID</order>
+	</record>
+	<record type="ITEMSELL">
+		  <titlescreen>Item</titlescreen>
+		  <sql>SELECT ITEM.[ITEM_ID],[ITEM_DESC],[SALES_PRICE_PER_UNIT_1],VMST_ITEM.[QUANTITY],0   FROM [ITEM] INNER JOIN dbo.VMST_ITEM ON dbo.ITEM.ITEM_ID = dbo.VMST_ITEM.ITEM_ID</sql>
+		  <title>ITEM.ITEM ID+DESCRIPTION+PRICE+STOCK+DISC+</title>
+		  <size>100+300+100+100+100+</size>
+		  <search>ITEM.[ITEM_ID]+[ITEM_DESC]+</search>
+		  <cond>CATEGORY='S'</cond>
+		  <order>ITEM.ITEM_ID</order>
+	</record>
+	<record type="ITEMSELLALLW">
+		  <titlescreen>Item</titlescreen>
+		  <sql>SELECT ITEM.[ITEM_ID],[ITEM_DESC],[SALES_PRICE_PER_UNIT_1],VMST_ITEM.[QUANTITY],disc_percentage   FROM [ITEM] left outer JOIN dbo.VMST_ITEM ON dbo.ITEM.ITEM_ID = dbo.VMST_ITEM.ITEM_ID AND ITEM.CATEGORY='S' left outer join CARD_ALLOWED_ITEM on VMST_ITEM.item_id=CARD_ALLOWED_ITEM.item_id</sql>
+		  <title>ITEM.ITEM ID+DESCRIPTION+PRICE+STOCK+DISC+</title>
+		  <size>100+300+100+100+100+</size>
+		  <search>ITEM.[ITEM_ID]+[ITEM_DESC]+</search>
+		  <cond>CARD_ID IS NULL OR card_id=+</cond>
+		  <order>ITEM.ITEM_ID</order>
+	</record>
+	<record type="EMPLOYEETHERAPIST">
+		  <titlescreen>Person In Charge</titlescreen>
+		  <sql>SELECT employee_id,employee_name  FROM employee </sql>
+		  <title>EMPLOYEE ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[employee_id]+[employee_name]+</search>
+		  <cond>MANAGEMENT_LEVEL='3'</cond>
+		  <order>employee_id</order>
+	</record>
+	<record type="TREATSELL">
+		  <titlescreen>Treatment</titlescreen>
+		  <sql>SELECT [TREATMENT_ID],[TREATMENT_name],SALES_PRICE   FROM [TREATMENT] </sql>
+		  <title>TREATMENT ID+DESCRIPTION+PRICE+</title>
+		  <size>100+300+100+100+</size>
+		  <search>[TREATMENT_ID]+[TREATMENT_name]+</search>
+		  <cond></cond>
+		  <order>TREATMENT_ID</order>
+	</record>
+	<record type="TREATSELLALLW">
+		  <titlescreen>Treatment</titlescreen>
+		  <sql>  SELECT [TREATMENT].[TREATMENT_ID],[TREATMENT_name],SALES_PRICE,disc_percentage   FROM [TREATMENT] left outer JOIN CARD_ALLOWED_TREATMENT ON CARD_ALLOWED_TREATMENT.TREATMENT_ID =TREATMENT.TREATMENT_ID</sql>
+		  <title>TREATMENT ID+DESCRIPTION+PRICE+DISC+</title>
+		  <size>100+300+100+100+100+</size>
+		  <search>[TREATMENT_ID]+[TREATMENT_name]+</search>
+		  <cond>CARD_ID IS NULL OR CARD_ID=+</cond>
+		  <order>TREATMENT.TREATMENT_ID</order>
+	</record>
+	<record type="TREATSELLALLW2">
+		  <titlescreen>Treatment</titlescreen>
+		  <sql>  SELECT [TREATMENT].[TREATMENT_ID],[TREATMENT_name],SALES_PRICE,disc_percentage   FROM [TREATMENT] inner JOIN CARD_ALLOWED_TREATMENT ON CARD_ALLOWED_TREATMENT.TREATMENT_ID =TREATMENT.TREATMENT_ID</sql>
+		  <title>TREATMENT ID+DESCRIPTION+PRICE+DISC+</title>
+		  <size>100+300+100+100+100+</size>
+		  <search>[TREATMENT_ID]+[TREATMENT_name]+</search>
+		  <cond>CARD_ID=+</cond>
+		  <order>TREATMENT.TREATMENT_ID</order>
+	</record>
+	<record type="TREATMENT">
+		  <titlescreen>Treatment</titlescreen>
+		  <sql>SELECT [TREATMENT_ID],[TREATMENT_name],SALES_PRICE   FROM [TREATMENT] </sql>
+		  <title>TREATMENT ID+DESCRIPTION+PRICE+</title>
+		  <size>100+300+100+100+</size>
+		  <search>[TREATMENT_ID]+[TREATMENT_name]+</search>
+		  <cond></cond>
+		  <order>TREATMENT_ID</order>
+	</record>
+	<record type="CONTRA">
+		  <titlescreen>Contra</titlescreen>
+		  <sql>SELECT seq,trxdate,curr,rate,amt FROM [Trx_UnpostedGL]</sql>
+		  <title>SEQ+DATE+CURRENCY+RATE+AMT+</title>
+		  <size>100+200+100+100+200+</size>
+		  <search>CURR+NOTE+REFNO+</search>
+		  <cond>ercode=+</cond>
+		  <order>seq,trxdate</order>
+	</record>
+	<record type="JOBNO">
+		  <titlescreen>Jobno</titlescreen>
+		  <sql>SELECT jobno,trxdate,typecode,bl,voyage,vesselname,b.codedesc FROM [trx_job] a left outer join vmst_customer b on a.customer=b.codeval and a.ercode=b.ercode</sql>
+		  <title>JOBNO+DATE+TYPE+BL NO.+VOYAGE+VESSEL+CUSTOMER+</title>
+		  <size>100+100+100+200+150+200+200+</size>
+          <date>2,</date>
+		  <search>jobno+trxdate+typecode+bl+voyage+vesselname+b.codedesc+</search>
+		  <cond>a.ercode=+</cond>
+		  <order>trxdate</order>
+	</record>
+	<record type="RATECUR">
+		  <titlescreen>Exchange Rate</titlescreen>
+		  <sql>SELECT excrate,trxdate FROM mst_exchangerate</sql>
+		  <title>RATE+EFFECTIVE DATE+</title>
+		  <size>100+300+</size>
+          <date>2,</date>
+		  <search>[excrate]+[trxdate]+</search>
+		  <cond>ercode=+ and curr=+</cond>
+		  <order>trxdate desc</order>
+	</record>
+	<record type="BANK">
+		  <titlescreen>Bank</titlescreen>
+		  <sql>SELECT [CodeVal],[CodeDesc],[Inflag] FROM [vMst_Bank]</sql>
+		  <title>BANK CODE+NAME+CURRENCY+</title>
+		  <size>100+300+200+</size>
+		  <search>[CodeVal]+[CodeDesc]+[Inflag]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="VENDOR">
+		  <titlescreen>Vendor</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_vendor </sql>
+		  <title>VENDOR ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="BILLTO">
+		  <titlescreen>Bill To</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_BILLTO</sql>
+		  <title>BILL TO+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond>ercode=+</cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="COSIGNEE">
+		  <titlescreen>Cosignee</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_cosignee</sql>
+		  <title>COSIGNEE ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond></cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="SHIPPER">
+		  <titlescreen>Shipper</titlescreen>
+		  <sql>select  [CodeVal],[CodeDesc] from vmst_shipper</sql>
+		  <title>SHIPPER ID+NAME+</title>
+		  <size>100+300+</size>
+		  <search>[CodeVal]+[CodeDesc]+</search>
+		  <cond></cond>
+		  <order>CodeVal</order>
+	</record>
+	<record type="ACCOUNT">
+		  <titlescreen>Account</titlescreen>
+		  <sql>select  [account],[description] from mst_account</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond>ercode=+</cond>
+		  <order>account</order>
+	</record>
+	<record type="ACCOUNTSALES">
+		  <titlescreen>Account</titlescreen>
+		  <sql>select  [account],[description] from mst_account</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond>(account like '41%' or account = '23330' or account='13600')and ercode=+</cond>
+		  <order>account</order>
+	</record>
+	<record type="ACCOUNTCOST">
+		  <titlescreen>Account</titlescreen>
+		  <sql>select  [account],[description] from mst_account</sql>
+		  <title>ACCOUNT NO+DESCRIPTION+</title>
+		  <size>100+300+</size>
+		  <search>[account]+[description]+</search>
+		  <cond>(account like '5%'  or account = '23310'  or account='64303')and ercode=+</cond>
+		  <order>account</order>
+	</record>
+</main>

@@ -1,0 +1,106 @@
+<main>                             
+	<record type="ITEMGROUP" title="Item Group" key="0" keydt="1" chk="true">
+		  <screen2>*Group Id,*Description,*Unit,Selling Price,</screen2>
+		  <component2>TITLE10,TITLE60,TITLE10,NUM+011,</component2>
+	</record>  
+	<record type="ITEMLIST" title="Item" key="1"> 
+		  <screen2>*Item Id,Supplier Item Code,*Item Description,*Category,Combine Item,Specification/Remark,Unit,Purchase Price,Selling Price,Reseller Price,Begin Stock,</screen2>
+		  <component2>TITLE40,TITLE40,TITLE100,TITLE60,ACTIVE,TITLE100,TITLE20,NUM+011,NUM+011,NUM+011,NUM+04,</component2>
+          <default2>,,,,0,,PC,0,0,0,0,</default2>
+		  <screendesc2>,</screendesc2>  
+	</record>    
+	<record type="CUSTLIST" title="Customer" key="1"> 
+		  <screen2>Customer Id,*Customer Name,Address,Customer Type,Contact person 1,Phone 1,Contact person 2,Phone 2,Contact person 3,Phone 3,Due Payment (day),Remark/Note,</screen2>
+		  <component2>,TITLE100,TITLE100,CUSTTYPE,TITLE20,TITLE60,TITLE20,TITLE60,TITLE20,TITLE60,NUM+02,TITLE60,</component2>
+		  <screendesc2>,</screendesc2>  
+	</record>    
+	<record type="SUPPLIERLIST" title="Supplier" key="1">
+		  <screen2>Supplier Id,*Supplier Name,Phone,Address,Contact person,Email Address,Advance Pay,Due Payment (day),Remark,</screen2>
+		  <component2>,TITLE100,TITLE20,TITLE100,TITLE60,TITLE100,ACTIVE,NUM+02,TITLE60,</component2>
+		  <default2>,,,,,,0,30,,</default2>
+		  <screendesc2>,</screendesc2>       
+	</record>
+	<record type="QUOLIST" title="Quotation" key="1" keydt="1" chk="true" fieldhd="17">
+		  <screen2>Quotation Id,*Transaction Date,Subject,*Customer,*Transaction Type,Accept Date,Rejected Date,Invoice Date,Invoice No,Sent Invoice Date,Installation Date,Description Quotation,Total Quotation,Discount,Service Cost,Grand Total,Close Date,Seq,Item Group,Quantity,Item Id,Quantity,Price,</screen2>
+		  <component2>,DATE,TITLE40,CUSTOMER,TRXTYPE,DATE,DATE,DATE,TITLE20,DATE,DATE,TITLE100,NUM+011,NUM+011,NUM+011,NUM+011,DATE,NUM+02,ITEMGROUP,NUM+03,ITEM,NUM+03,NUM+011,</component2>
+		  <screendesc2>,</screendesc2>
+          <hidden2>Y21,Y31,</hidden2>    
+	</record>  
+	<record type="FUQUO" title="Follow Up Quotation" key="0" keydt="1" chk="true">
+		  <screen2>Quotation Id,Transaction Date,Customer,Total Quotation,Accept,Installed,Rejected,Invoice,Sent Invoice,Closed,Ready,</screen2>
+		  <component2>TITLE20,TITLE20,TITLE20,TITLE20,ACTIVE,ACTIVE,ACTIVE,ACTIVE,ACTIVE,ACTIVE,,</component2>
+		  <default2>,,,,0,0,0,0,0,0,,</default2>
+		  <screendesc2>,</screendesc2>  
+	</record>  
+	<record type="POLIST" title="Purchase Order" key="1" keydt="1" chk="true" fieldhd="6">
+		  <screen2>PO Id,Transaction Date,Supplier,Total PO,Received Date,Cancel Date,Item Id,Quotation Id,Quantity,Price,</screen2>
+		  <component2>,DATE,SUPPLIER,NUM+011,DATE,DATE,ITEM,TITLE20,NUM+03,NUM+011,</component2>
+		  <screendesc2>,</screendesc2>
+          <hidden2>Y21,Y31,</hidden2>    
+	</record>      
+	<record type="CREATEPO" title="Create PO for Quotation" key="0" keydt="1" chk="true">
+		  <screen2>QUOTATION ID,CUSTOMER,ITEM ID,STOCK,ITEM NAME,QUO QTY,QUOTATION PRICE,*ORDER QTY,*SUPPLIER,*PRICE,</screen2>
+		  <component2>,,,,,,,NUM+03,SUPPLIER,NUM+011,</component2>
+		  <screendesc2>,</screendesc2>
+	</record>      
+	<record type="INVOICE" title="Invoice" key="1" keydt="1" chk="true" fieldhd="13">
+		  <screen2>Sales Id,*Transaction Date,,Customer,Invoice No,Sent Invoice Date,Installation Date,Description,Quotation Id,Total Invoice,Discount,Service Cost,Grand Total,Seq,Item Group,Quantity,Item Id,Quantity,Selling Price,</screen2>
+		  <component2>,DATE,TITLE20,CUSTOMER,TITLE20,DATE,DATE,TITLE100,TITLE10,NUM+011,NUM+011,NUM+011,NUM+011,NUM+02,ITEMGROUP,NUM+03,ITEM,NUM+03,NUM+011,</component2>
+		  <screendesc2>,</screendesc2>  
+	</record>  
+	<record type="PURCHASELIST" title="Purchasing" key="1" keydt="1" chk="true" fieldhd="11">
+		  <screen2>Purchase Id,Transaction Date,Supplier,Payment,Payment Date,Due Date,Discount,Cost,Total,PO Id,Received Date,Item Id,Quantity,Price,</screen2>
+		  <component2>,DATE,SUPPLIER,PAYTP,DATE,DATE,NUM+011,NUM+011,NUM+011,POID,DATE,ITEM,NUM+03,NUM+011,</component2>
+		  <default2>,,,B,,,0,0,0,,,,0,0,</default2>
+		  <screendesc2>,</screendesc2>
+          <hidden2>Y21,Y31,</hidden2>    
+	</record>      
+	<record type="REPSUPP" title="Payment Supplier" key="3" forfilter="0">
+		  <screen1>Supplier,Purchasing From Date,To Date,</screen1>
+		  <component1>SUPPLIER,DATE,DATE,</component1>
+		  <hidden1>YY11,YY12,YY13,</hidden1>
+		  <jsfrom1>Y11,Y12,Y13,</jsfrom1>
+		  <jsto1>YY11,YY12,YY13,</jsto1>
+	</record>      
+	<record type="REPCUST" title="Payment Customer" key="3" forfilter="0">
+		  <screen1>Customer,Sales From Date,To Date,</screen1>
+		  <component1>CUSTOMER,DATE,DATE,</component1>
+		  <hidden1>YY11,YY12,YY13,</hidden1>
+		  <jsfrom1>Y11,Y12,Y13,</jsfrom1>
+		  <jsto1>YY11,YY12,YY13,</jsto1>
+	</record>      
+	<record type="TRANSACTIONLIST" title="Bank/Cash" key="2" forfilter="0"> 
+		  <screen2>Transaction Id,*Transaction Date,Ref No,Customer/Supplier,Payment Date,Payment Method,Remark,In/Out,Total,</screen2>
+		  <component2>,DATE,TITLE15,CUSTSUPP,DATE,PAYTP,TITLE100,INOUT,NUM+011,</component2>
+		  <screendesc2>,</screendesc2>  
+          <hidden1>YY11,YY12,</hidden1>
+	</record>  
+	<record type="REPFINANCE" title="Finance Report" key="3">
+		  <screen1>*Year,Start Month,</screen1>
+		  <component1>NUM+4,NUM+2,</component1>
+		  <hidden1>Y21,Y31,Y41,Y61,</hidden1>
+		  <jsfrom1>Y11,Y11,Y11,Y11,</jsfrom1>
+		  <jsto1>Y21,Y31,Y41,Y61,</jsto1>
+	</record>      
+	<record type="REPSALES" title="Sales Report" key="3">
+		  <screen1>*Year,Start Month,</screen1>
+		  <component1>NUM+4,NUM+2,</component1>
+		  <hidden1>Y21,Y31,Y41,</hidden1>
+		  <jsfrom1>Y11,Y11,Y11,</jsfrom1>
+		  <jsto1>Y21,Y31,Y41,</jsto1>
+	</record>      
+	<record type="REPSUMMARY" title="Summary Profit Report" key="3">
+		  <screen1>*Year,Month,</screen1>
+		  <component1>NUM+4,NUM+2,</component1>
+		  <hidden1>Y21,</hidden1>
+		  <jsfrom1>Y11,</jsfrom1>
+		  <jsto1>Y21,</jsto1>
+	</record>      
+	<record type="REPINVENTORY" title="Stock Report" key="3">
+		  <screen1>*Year,Month,</screen1>
+		  <component1>NUM+4,NUM+2,</component1>
+		  <hidden1>Y21,</hidden1>
+		  <jsfrom1>Y11,</jsfrom1>
+		  <jsto1>Y21,</jsto1>
+	</record>      
+</main>
